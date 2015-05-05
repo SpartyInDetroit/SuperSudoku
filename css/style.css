@@ -1,0 +1,158 @@
+@import url(http://fonts.googleapis.com/css?family=Lato);
+/*index.php, main page layout*/
+html,body,#wrap {
+    min-height:100%;
+}
+
+body {
+    color:#333;
+    font-family: Lato;
+    background:url("../img/swirl_pattern.png");
+    margin:0;
+    height:100vh;
+}
+h1 {
+    font-size:3em;
+    margin:0;
+    padding:20px 0;
+}
+.nav {
+    list-style: none;
+    padding: 0;
+    margin-top:0;
+}
+.nav li {
+    display:inline-block;
+    margin:0 10px;
+}
+.nav li a, .nav li a:visited {
+    color:#333;
+    text-decoration: none;
+}
+.nav li a:hover {
+    color:#2980b9;
+}
+#wrap {
+    width:900px;
+    margin:0 auto;
+    background-color: rgba(255, 255, 255, 0.88);
+    text-align: center;
+    padding-bottom:10px;
+}
+#game_board_static {
+    margin:15px 0;
+}
+.text {
+    border: 1px solid #B6B5B5;
+    font-size: 1.3em;
+    padding: 5px;
+}
+input {
+    font-family: inherit;
+    border-radius:2px;
+}
+.button {
+    height: 37px;
+    border: none;
+    border-bottom: 3px solid #246996;
+    cursor: pointer;
+    background: #2980b9;
+    color: white;
+    font-size: 1.2em;
+    padding: 0px 20px;
+    vertical-align: bottom;
+}
+/*game.php*/
+.game_board, .game_board th, .game_board td {
+    border: 1px solid #333;
+    border-collapse: collapse;
+}
+.game_board {
+    margin:0 auto;
+    border: 3px solid #333;
+}
+.game_board td {
+    width:50px;
+    height:50px;
+    font-weight:bold;
+    position:relative;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+    cursor:pointer;
+}
+.game_board .border-bottom {
+    border-bottom: 3px solid #333;
+}
+.game_board .border-right {
+    border-right: 3px solid #333;
+}
+.hint {
+    position: absolute;
+    color: gray;
+    font-weight: lighter;
+    font-size:.8em;
+}
+/*rows of hints*/
+.hint_0, .hint_1, .hint_2 {
+    top:-1px;
+}
+.hint_3,.hint_4, .hint_5 {
+    top:17px;
+}
+.hint_6, .hint_7, .hint_8 {
+    top:36px;
+}
+
+/*columns of hints*/
+.hint_0, .hint_3, .hint_6 {
+    left:1px;
+}
+.hint_1, .hint_4, .hint_7 {
+    left:21px;
+}
+.hint_2, .hint_5, .hint_8 {
+    left:40px;
+}
+
+.chooseCell {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 52px;
+    width: 52px;
+}
+.no-cursor {
+    cursor:initial;
+    height:32px;
+    padding-top:15px;
+}
+.blue {
+    color:#2980b9;
+}
+.chooseCell:focus {
+    outline:2px solid #2980b9;
+}
+#pickValue, #pickHint {
+    height: 37px;
+    width: 50px;
+    font-family: inherit;
+    cursor: pointer;
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 2px;
+}
+#cheatForm, #playForm {
+    display:inline-block;
+}
+#cheatForm {
+    position: relative;
+    top: 7px;
+    left: 5px;
+}
