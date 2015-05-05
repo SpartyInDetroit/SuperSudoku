@@ -156,3 +156,28 @@ input {
     top: 7px;
     left: 5px;
 }
+#popup {
+    position: absolute;
+    top: calc( 50% - 82.5px);
+    right: calc(50% - 118px);
+    background: white;
+    border: 3px solid #2980B9;
+    border-radius: 3px;
+    padding:10px;
+    display:none;
+    width:225px;
+}
+.grey {
+    border-bottom: 3px solid #9BB3C2;
+    background: #ABC0CE;
+}
+#popup  p {
+    display:inline-block;
+    width:calc(50% - 20px);
+    text-align:right;
+}
+#popup .select {
+    display:inline-block;
+    width:calc(47% - 20px);
+    text-align:left;
+}

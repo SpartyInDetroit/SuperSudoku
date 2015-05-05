@@ -62,6 +62,48 @@ HTML;
         $answer = $cell->getAnswer();
         return  '<span class="chooseCell no-cursor"></span>'.$answer;
     }
+    public function displayForm() {
+        $html = <<<HTML
+        <div id="popup">
+        <form>
+         <div><p>Pick Value</p>
+         <div class="select">
+            <select id="pickValue" name="pickValue" autofocus>
+                <option value="0"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+            </div>
+            </div>
+            <div><p>Pick Hint</p>
+            <div class="select">
+            <select id="pickHint" name="pickHint">
+                <option value="0"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+            </div>
+            </div>
+            <input id="cancelPick" type="button" class="button grey" value="Cancel">
+            </form>
+    </div>
+HTML;
+    return $html;
+    }
 
     private $sudoku;    // The sudoku object
 }
