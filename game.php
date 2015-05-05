@@ -80,27 +80,43 @@ $view = new SudokuView($sudoku);
             $("#popup").toggle();
             $("#pickHint").val(0);
         });
+        $("#giveUp").click(function(event) {
+            event.preventDefault();
+            giveUp = true;
+            updateBoard();
+        });
+
 
     });
 
-    var boards = new Board();
-    var gameBoard = boards.boards[1];
-    updateBoard();
-    function chooseCell(element) {
-        console.log(element);
-        $("#popup").show();
-        var row = $(element).parent()[0].id[0];
-        var column = $(element).parent()[0].id[2];
-        $("#popup").data("row",row);
-        $("#popup").data("column",column);
+    var gameBoard = getRandomBoard();
+
+    var giveUp = false;
+    var cheat = window.location.search.replace("?", "");
+    console.log(cheat);
+    if(cheat) {
+        console.log("hi");
+        gameBoard = getCheatBoard();
     }
+    updateBoard();
+    function getCheatBoard() {
+        var boards = new Board();
+        return boards.boards[4];
+    }
+
+    function getRandomBoard() {
+        var rand = Math.floor(Math.random()*10);
+        var boards = new Board();
+        return boards.boards[rand];
+    }
+
     function updateBoard() {
         for(var i=0; i<9; i++) {
             for(var j=0; j<9;j++) {
                 var cell = gameBoard[i][j];
                 var html ="";
                 var inserted = "";
-                if(cell.constant) {
+                if(cell.constant || giveUp) {
                     html = '<span class="no-cursor">'+cell.answer+'</span>';
                     $("#"+i+"_"+j).children("span").removeClass("chooseCell");
                     $("#"+i+"_"+j).children("span").removeClass("blue");
@@ -111,16 +127,13 @@ $view = new SudokuView($sudoku);
                     inserted = cell.guess;
                 }
                 else {
-
                     for(var k=0; k<9; k++) {
                         insertedHint = "";
                         if(cell.notes[k]) {
                             insertedHint = k+1;
                         }
                         $("#"+i+"_"+j).children(".hint_"+k).html(insertedHint);
-
                     }
-
                 }
                 $("#"+i+"_"+j).children(".cell").html(inserted);
             }

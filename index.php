@@ -17,8 +17,8 @@ require_once("lib/nav.inc.php");
             <input class="text" type="text" name="playerName" placeholder="Enter your name...">
             <input class="button" type="submit" value="Play">
         </form>
-        <form id="cheatForm" method="POST" autocomplete="off" name="cheat" action="game-post.php">
-            <input type="hidden" name="cheat" value="cheating">
+        <form id="cheatForm" method="GET" autocomplete="off" name="cheat" action="game.php">
+            <input type="hidden" name="cheat" value="1">
             <input class="button" type="submit" value="Cheat">
         </form>
         </div>

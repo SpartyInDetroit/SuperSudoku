@@ -12,7 +12,7 @@ function print_nav() {
         <ul class="nav">
             <li><a href="index.php">New Game</a></li>
             <li><a href="game.php">Game</a></li>
-            <li><a href="giveup.php">Give Up</a></li>
+            <li><a id="giveUp" href="">Give Up</a></li>
         </ul>
 HTML;
     return $html;
