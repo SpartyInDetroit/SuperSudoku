@@ -37,8 +37,8 @@ $view = new SudokuView($sudoku);
                 ?>
 
                 <td class="<?php echo $cssClassColumn;?>" id="<?php echo $i,"_",$j;?>">
-<!--                    --><?php //echo $view->displayCell($i, $j); ?>
-<!--                    --><?php //echo $view->displayNotes($i, $j); ?>
+                    <?php echo $view->displayCell($i, $j); ?>
+                    <?php echo $view->displayNotes($i, $j); ?>
                 </td>
             <?php } ?>
             </tr>
@@ -51,6 +51,7 @@ $view = new SudokuView($sudoku);
 
     $(document).ready(function(){
         $(".chooseCell").click(function() {
+            console.log(this);
             $("#popup").show();
             var row = $(this).parent()[0].id[0];
             var column = $(this).parent()[0].id[2];
@@ -79,35 +80,49 @@ $view = new SudokuView($sudoku);
             $("#popup").toggle();
             $("#pickHint").val(0);
         });
+
     });
 
     var boards = new Board();
     var gameBoard = boards.boards[1];
     updateBoard();
-
+    function chooseCell(element) {
+        console.log(element);
+        $("#popup").show();
+        var row = $(element).parent()[0].id[0];
+        var column = $(element).parent()[0].id[2];
+        $("#popup").data("row",row);
+        $("#popup").data("column",column);
+    }
     function updateBoard() {
         for(var i=0; i<9; i++) {
             for(var j=0; j<9;j++) {
                 var cell = gameBoard[i][j];
-                var html;
+                var html ="";
+                var inserted = "";
                 if(cell.constant) {
                     html = '<span class="no-cursor">'+cell.answer+'</span>';
+                    $("#"+i+"_"+j).children("span").removeClass("chooseCell");
+                    $("#"+i+"_"+j).children("span").removeClass("blue");
+                    $("#"+i+"_"+j).children("span").addClass("no-cursor");
+                    inserted = cell.answer;
                 }
                 else if(cell.guess){
-                    html = '<span class="chooseCell blue">'+cell.guess+'</span>';
+                    inserted = cell.guess;
                 }
                 else {
-                    html = '<span class="chooseCell blue"></span>';
+
                     for(var k=0; k<9; k++) {
+                        insertedHint = "";
                         if(cell.notes[k]) {
-                            html += '<span class="hint hint_'+k+'">'+(k+1)+'</span>';
+                            insertedHint = k+1;
                         }
-                        else {
-                            html += '<span class="hint hint_'+k+'""></span>';
-                        }
+                        $("#"+i+"_"+j).children(".hint_"+k).html(insertedHint);
+
                     }
+
                 }
-                $("#"+i+"_"+j).html(html);
+                $("#"+i+"_"+j).children(".cell").html(inserted);
             }
         }
     }

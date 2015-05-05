@@ -13,43 +13,19 @@ class SudokuView {
     }
 
     public function displayCell($row, $column) {
-        $cell = $this->sudoku->getGameBoard()[$row][$column];
-        $answer = $cell->getAnswer();
-        $guess = $cell->getGuess();
-        $constant = $cell->getConstant();
-        if($constant) {
-            $html =  '<span class="chooseCell no-cursor blue">'.$answer.'</span>';
-        }
-        else if($guess != '0') {
-            $html = <<<HTML
-                <a class="chooseCell" href="put-number.php?row=$row&column=$column"></a>
-                $guess
-HTML;
-        } else {
-            $html = <<<HTML
-                <a class="chooseCell" id="emptyCell" href="put-number.php?row=$row&column=$column"></a>
-HTML;
-        }
+            $html =  '<span class="cell chooseCell blue"></span>';
         return $html;
     }
 
     public function displayNotes($row, $column) {
-        $cell = $this->sudoku->getGameBoard()[$row][$column];
-        $constant = $cell->getConstant();
-        $notes = $cell->getNotes();
-        $guess = $cell->getGuess();
         $html = '';
-        if(!$constant && $guess == 0) {
             for($i=0; $i<9; $i++) {
-                if($notes[$i] == 1) {
                     $j = $i+1;
                     $html .= <<<HTML
-<span class="hint hint_$i" id="hint_$i _0_$column">$j </span>
+<span class="hint hint_$i"></span>
 HTML;
 
                 }
-            }
-        }
         return $html;
     }
     public function displayWinMessage() {
