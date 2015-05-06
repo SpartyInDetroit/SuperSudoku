@@ -126,8 +126,9 @@ input {
     position: absolute;
     top: 0;
     left: 0;
-    height: 52px;
+    height: 37px;
     width: 52px;
+    padding-top: 15px;
 }
 .no-cursor {
     cursor:initial;
