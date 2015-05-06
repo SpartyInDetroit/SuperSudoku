@@ -156,7 +156,7 @@ input {
     top: 7px;
     left: 5px;
 }
-#popup {
+#popup, #popupWin {
     position: absolute;
     top: calc( 50% - 82.5px);
     right: calc(50% - 118px);
@@ -167,6 +167,16 @@ input {
     display:none;
     width:225px;
 }
+
+#popupWin {
+    width: 300px;
+}
+
+#popupWin p {
+    display:inline-block;
+    text-align:center;
+}
+
 .grey {
     border-bottom: 3px solid #9BB3C2;
     background: #ABC0CE;

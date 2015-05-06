@@ -81,5 +81,18 @@ HTML;
     return $html;
     }
 
+    public function displayWin() {
+        $html = <<<HTML
+        <div id="popupWin">
+            <form>
+                <p>Congratulations <span id="winnerName"></span>, you won!!!</p>
+                <p>It took you <span id="winnerMoves"></span> moves</p>
+                <p><a href="index.php">New Game</a></p>
+            </form>
+        </div>
+HTML;
+        return $html;
+    }
+
     private $sudoku;    // The sudoku object
 }

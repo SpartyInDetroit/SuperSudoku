@@ -45,13 +45,13 @@ $view = new SudokuView($sudoku);
         <?php } ?>
     </table>
     <?php echo $view->displayForm(); ?>
+    <?php echo $view->displayWin(); ?>
 </div>
 </body>
 <script>
 
     $(document).ready(function(){
         $(".chooseCell").click(function() {
-            console.log(this);
             $("#popup").show();
             var row = $(this).parent()[0].id[0];
             var column = $(this).parent()[0].id[2];
@@ -65,8 +65,17 @@ $view = new SudokuView($sudoku);
             var guess = $("#pickValue").val();
             var row = $("#popup").data("row");
             var column =$("#popup").data("column");
-            gameBoard[row][column].setGuess(guess);
-            updateBoard();
+            sudoku.gameBoard[row][column].setGuess(guess);
+            sudoku.incrementMoves();
+            if(sudoku.checkIfWon()) {
+                $("#winnerMoves").html(sudoku.moves);
+                $("#winnerName").html(sudoku.playerName);
+                $("#popupWin").toggle();
+                console.log("WINNER");
+                updateBoard();
+            } else {
+                updateBoard();
+            }
             $("#popup").hide();
             $("#pickValue").val(0);
         });
@@ -75,7 +84,7 @@ $view = new SudokuView($sudoku);
             var hint = $("#pickHint").val();
             var row = $("#popup").data("row");
             var column =$("#popup").data("column");
-            gameBoard[row][column].setNote(hint);
+            sudoku.gameBoard[row][column].setNote(hint);
             updateBoard();
             $("#popup").toggle();
             $("#pickHint").val(0);
@@ -88,32 +97,42 @@ $view = new SudokuView($sudoku);
 
 
     });
+    //BEFOR WE USED SUDOKU CLASS
+//    var gameBoard = getRandomBoard();
+//
+//    var giveUp = false;
+//    var cheat = window.location.search.replace("?", "");
+//    console.log(cheat);
+//    if(cheat) {
+//        console.log("hi");
+//        gameBoard = getCheatBoard();
+//    }
+//    updateBoard();
+//    function getCheatBoard() {
+//        var boards = new Board();
+//        return boards.boards[4];
+//    }
+//
+//    function getRandomBoard() {
+//        var rand = Math.floor(Math.random()*10);
+//        var boards = new Board();
+//        return boards.boards[rand];
+//    }
 
-    var gameBoard = getRandomBoard();
-
+    // Change to sudoku.gameBoard throughout!!!
     var giveUp = false;
     var cheat = window.location.search.replace("?", "");
-    console.log(cheat);
     if(cheat) {
-        console.log("hi");
-        gameBoard = getCheatBoard();
+        var sudoku = new Sudoku('Cheat', true);
+    } else {
+        var sudoku = new Sudoku('Vinny');
     }
     updateBoard();
-    function getCheatBoard() {
-        var boards = new Board();
-        return boards.boards[4];
-    }
-
-    function getRandomBoard() {
-        var rand = Math.floor(Math.random()*10);
-        var boards = new Board();
-        return boards.boards[rand];
-    }
 
     function updateBoard() {
         for(var i=0; i<9; i++) {
             for(var j=0; j<9;j++) {
-                var cell = gameBoard[i][j];
+                var cell = sudoku.gameBoard[i][j];
                 var html ="";
                 var inserted = "";
                 if(cell.constant || giveUp) {
