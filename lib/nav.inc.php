@@ -10,8 +10,8 @@ function print_nav() {
     $html = <<<HTML
     <h1>Super Sudoku</h1>
         <ul class="nav">
-            <li><a href="index.php">New Game</a></li>
-            <li><a href="game.php">Game</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="game.php">New Game</a></li>
             <li><a id="giveUp" href="">Give Up</a></li>
         </ul>
 HTML;

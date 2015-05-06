@@ -97,35 +97,23 @@ $view = new SudokuView($sudoku);
 
 
     });
-    //BEFOR WE USED SUDOKU CLASS
-//    var gameBoard = getRandomBoard();
-//
-//    var giveUp = false;
-//    var cheat = window.location.search.replace("?", "");
-//    console.log(cheat);
-//    if(cheat) {
-//        console.log("hi");
-//        gameBoard = getCheatBoard();
-//    }
-//    updateBoard();
-//    function getCheatBoard() {
-//        var boards = new Board();
-//        return boards.boards[4];
-//    }
-//
-//    function getRandomBoard() {
-//        var rand = Math.floor(Math.random()*10);
-//        var boards = new Board();
-//        return boards.boards[rand];
-//    }
 
-    // Change to sudoku.gameBoard throughout!!!
     var giveUp = false;
-    var cheat = window.location.search.replace("?", "");
+    var cheat = false;
+    <?php
+        if(isset($_REQUEST['cheat'])) {
+            echo 'var cheat = true;';
+        }
+        if(isset($_REQUEST['playerName'])) {
+            $name = $_REQUEST['playerName'];
+            echo "var name = '$name'";
+        }
+    ?>
+
     if(cheat) {
-        var sudoku = new Sudoku('Cheat', true);
+        var sudoku = new Sudoku("Cheat", true);
     } else {
-        var sudoku = new Sudoku('Vinny');
+        var sudoku = new Sudoku(name);
     }
     updateBoard();
 

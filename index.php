@@ -13,11 +13,11 @@ require_once("lib/nav.inc.php");
         <?php echo print_nav(); ?>
         <img id="game_board_static" alt="game-board" src="img/game1.png" width="448" height="448">
         <div>
-        <form id="playForm" method="POST" autocomplete="off" name="playerName" action="game-post.php">
+        <form id="playForm" method="POST" autocomplete="off" name="playerName" action="game.php">
             <input class="text" type="text" name="playerName" placeholder="Enter your name...">
             <input class="button" type="submit" value="Play">
         </form>
-        <form id="cheatForm" method="GET" autocomplete="off" name="cheat" action="game.php">
+        <form id="cheatForm" method="POST" autocomplete="off" name="cheat" action="game.php">
             <input type="hidden" name="cheat" value="1">
             <input class="button" type="submit" value="Cheat">
         </form>
