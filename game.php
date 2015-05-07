@@ -57,14 +57,16 @@ $view = new SudokuView($sudoku);
             var column = $(this).parent()[0].id[2];
             $("#popup").data("row",row);
             $("#popup").data("column",column);
+            currentGuess = sudoku.gameBoard[row][column].getGuess();
+            $("#pickValue").val(currentGuess);
         });
         $("#cancelPick").click(function(){
             $("#popup").toggle();
         });
         $("#pickValue").change(function(event) {
-            var guess = $("#pickValue").val();
             var row = $("#popup").data("row");
             var column =$("#popup").data("column");
+            var guess = $("#pickValue").val();
             sudoku.gameBoard[row][column].setGuess(guess);
             sudoku.incrementMoves();
             if(sudoku.checkIfWon()) {
@@ -131,7 +133,7 @@ $view = new SudokuView($sudoku);
                     inserted = cell.answer;
                 }
                 else if(cell.guess){
-                    inserted = cell.guess;
+                    inserted = cell.guess == 0 ? "" : cell.guess;
                 }
                 else {
                     for(var k=0; k<9; k++) {
