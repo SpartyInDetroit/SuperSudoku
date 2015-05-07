@@ -132,8 +132,12 @@ $view = new SudokuView($sudoku);
                     $("#"+i+"_"+j).children("span").addClass("no-cursor");
                     inserted = cell.answer;
                 }
-                else if(cell.guess){
+                else if(cell.guess != 0){
                     inserted = cell.guess == 0 ? "" : cell.guess;
+                    for(var k=0; k<9; k++) {
+                        insertedHint = "";
+                        $("#"+i+"_"+j).children(".hint_"+k).html(insertedHint);
+                    }
                 }
                 else {
                     for(var k=0; k<9; k++) {
